@@ -122,7 +122,17 @@ public class IndexContrller {
 	@RequestMapping("/admin/main")
 	public ModelAndView admin_main(HttpServletResponse  res,HttpServletRequest req) throws Exception {
 		ModelAndView mav = new ModelAndView();
-	
+		
+	        publicService.addLeftMenu(mav);
+		
+		System.out.println(MyUtil.getRemoteAddress(req));
+		
+		String UserAgent = req.getHeader("User-Agent");
+		if(MyUtil.checkUserAgent(UserAgent)){
+			mav.setViewName("/admin/main");
+		}else{
+			mav.setViewName("/admin/common/s_mode");
+		}
 		return mav;
 	}
 	
